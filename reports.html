@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>AttendCloud | Reports</title>
+    <link rel="stylesheet" href="css/style.css">
+
+    <style>
+        .page-container {
+            width: 92%;
+            max-width: 1150px;
+            margin: 35px auto;
+        }
+
+        .page-nav {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin: 20px 0 25px;
+        }
+
+        .page-nav a {
+            padding: 12px 15px;
+            text-decoration: none;
+            background: white;
+            border: 1px solid #e1e7f0;
+            border-radius: 8px;
+            color: #34425b;
+            font-size: 13px;
+        }
+
+        .page-nav a.active {
+            background: #4263eb;
+            color: white;
+        }
+
+        .report-card {
+            background: white;
+            border: 1px solid #e1e7f0;
+            border-radius: 13px;
+            padding: 25px;
+            margin-bottom: 22px;
+        }
+
+        .report-controls {
+            display: flex;
+            align-items: end;
+            gap: 12px;
+            flex-wrap: wrap;
+            margin: 20px 0;
+        }
+
+        .report-controls .form-group {
+            flex: 1;
+            min-width: 220px;
+            margin: 0;
+        }
+
+        .report-controls select {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #e1e7f0;
+            border-radius: 8px;
+            background: white;
+        }
+
+        .report-summary {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 14px;
+            margin-top: 20px;
+        }
+
+        .summary-item {
+            padding: 18px;
+            border-radius: 10px;
+            background: #f5f7fc;
+        }
+
+        .summary-item p {
+            color: #718096;
+            font-size: 12px;
+            margin-bottom: 9px;
+        }
+
+        .summary-item h3 {
+            color: #4263eb;
+            font-size: 24px;
+        }
+
+        .table-wrapper {
+            width: 100%;
+            overflow-x: auto;
+            margin-top: 20px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            text-align: left;
+        }
+
+        th, td {
+            padding: 14px 12px;
+            border-bottom: 1px solid #edf0f5;
+            font-size: 13px;
+            white-space: nowrap;
+        }
+
+        th {
+            background: #f7f8fc;
+            color: #718096;
+            font-size: 11px;
+            text-transform: uppercase;
+        }
+
+        .report-message {
+            color: #718096;
+            font-size: 13px;
+            margin-top: 15px;
+        }
+
+        @media(max-width: 800px) {
+            .report-summary {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media(max-width: 450px) {
+            .report-summary {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+<header class="navbar">
+    <div class="logo">
+        <span class="logo-icon">✓</span>
+        <div>
+            <h2>AttendCloud</h2>
+            <p>Student Attendance Management</p>
+        </div>
+    </div>
+</header>
+
+<main class="page-container">
+
+    <h1>Attendance Reports</h1>
+    <p class="welcome-description">
+        Review individual student attendance and attendance percentages.
+    </p>
+
+    <nav class="page-nav">
+        <a href="dashboard.html">Dashboard</a>
+        <a href="students.html">Students</a>
+        <a href="attendance.html">Attendance</a>
+        <a href="reports.html" class="active">Reports</a>
+    </nav>
+
+    <section class="report-card">
+
+        <h2>Generate Student Report</h2>
+
+        <div class="report-controls">
+            <div class="form-group">
+                <label for="student-select">Select Student</label>
+
+                <select id="student-select">
+                    <option value="">Loading students...</option>
+                </select>
+            </div>
+
+            <button id="generate-button" type="button" class="primary-btn"
+                style="width:auto;">
+                Generate Report
+            </button>
+        </div>
+
+        <p id="report-message" class="report-message" role="status">
+            Select a student to view their report.
+        </p>
+
+    </section>
+
+    <section class="report-card">
+
+        <h2>Attendance Summary</h2>
+
+        <div class="report-summary">
+            <div class="summary-item">
+                <p>Days Recorded</p>
+                <h3 id="total-days">0</h3>
+            </div>
+
+            <div class="summary-item">
+                <p>Present / Late</p>
+                <h3 id="present-days">0</h3>
+            </div>
+
+            <div class="summary-item">
+                <p>Absent Days</p>
+                <h3 id="absent-days">0</h3>
+            </div>
+
+            <div class="summary-item">
+                <p>Attendance Rate</p>
+                <h3 id="attendance-percentage">0%</h3>
+            </div>
+        </div>
+
+    </section>
+
+    <section class="report-card">
+
+        <h2>Date-wise Attendance</h2>
+
+        <div class="table-wrapper">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Date</th>
+                        <th>Roll Number</th>
+                        <th>Student Name</th>
+                        <th>Status</th>
+                    </tr>
+                </thead>
+
+                <tbody id="report-table">
+                    <tr>
+                        <td colspan="4">No report generated yet.</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+    </section>
+
+</main>
+
+<footer class="footer">
+    <p>Cloud-Based Student Attendance Management System</p>
+</footer>
+
+<script type="module" src="js/reports.js"></script>
+
+</body>
+</html>

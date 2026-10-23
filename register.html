@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AttendCloud | Register</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<header class="navbar">
+    <div class="logo">
+        <span class="logo-icon">✓</span>
+        <div>
+            <h2>AttendCloud</h2>
+            <p>Student Attendance Management</p>
+        </div>
+    </div>
+</header>
+
+<main class="auth-container">
+
+    <section class="welcome-section">
+        <p class="eyebrow">JOIN ATTENDCLOUD</p>
+        <h1>Create your<br><span>teacher account.</span></h1>
+
+        <p class="welcome-description">
+            Register to manage student information, record attendance,
+            and generate attendance reports using cloud technology.
+        </p>
+
+        <div class="feature-list">
+            <p>✓ Easy student management</p>
+            <p>✓ Secure authentication</p>
+            <p>✓ Cloud-based attendance records</p>
+            <p>✓ Individual attendance reports</p>
+        </div>
+    </section>
+
+    <section class="auth-card">
+
+        <div class="auth-heading">
+            <h2>Create account</h2>
+            <p>Enter your details to get started.</p>
+        </div>
+
+        <form id="register-form">
+
+            <div class="form-group">
+                <label for="teacher-name">Teacher Name</label>
+                <input
+                    type="text"
+                    id="teacher-name"
+                    placeholder="Enter your name"
+                    required
+                    maxlength="100"
+                >
+            </div>
+
+            <div class="form-group">
+                <label for="email">Email Address</label>
+                <input
+                    type="email"
+                    id="email"
+                    placeholder="Enter your email"
+                    autocomplete="email"
+                    required
+                >
+            </div>
+
+            <div class="form-group">
+                <label for="password">Password</label>
+                <input
+                    type="password"
+                    id="password"
+                    placeholder="At least 6 characters"
+                    minlength="6"
+                    autocomplete="new-password"
+                    required
+                >
+            </div>
+
+            <div class="form-group">
+                <label for="confirm-password">Confirm Password</label>
+                <input
+                    type="password"
+                    id="confirm-password"
+                    placeholder="Re-enter your password"
+                    minlength="6"
+                    autocomplete="new-password"
+                    required
+                >
+            </div>
+
+            <button type="submit" id="register-button" class="primary-btn">
+                Create Account
+            </button>
+
+            <p id="register-message" class="message" role="status"></p>
+
+        </form>
+
+        <div class="auth-footer">
+            <p>
+                Already have an account?
+                <a href="index.html">Login here</a>
+            </p>
+        </div>
+
+    </section>
+
+</main>
+
+<footer class="footer">
+    <p>Cloud-Based Student Attendance Management System</p>
+</footer>
+
+<script type="module" src="js/register.js"></script>
+
+</body>
+</html>

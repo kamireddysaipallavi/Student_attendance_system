@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AttendCloud | Dashboard</title>
+    <link rel="stylesheet" href="css/style.css">
+
+    <style>
+        .dashboard-container {
+            max-width: 1150px;
+            width: 92%;
+            margin: 35px auto;
+        }
+
+        .dashboard-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 25px;
+        }
+
+        .dashboard-header h1 {
+            margin-bottom: 8px;
+        }
+
+        .dashboard-nav {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-bottom: 25px;
+        }
+
+        .dashboard-nav a {
+            text-decoration: none;
+            background: white;
+            border: 1px solid #e1e7f0;
+            border-radius: 8px;
+            padding: 12px 15px;
+            color: #34425b;
+            font-size: 13px;
+            font-weight: bold;
+        }
+
+        .dashboard-nav a.active,
+        .dashboard-nav a:hover {
+            background: #4263eb;
+            color: white;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 18px;
+            margin-bottom: 25px;
+        }
+
+        .stat-card {
+            padding: 24px;
+            border-radius: 13px;
+            background: white;
+            border: 1px solid #e1e7f0;
+        }
+
+        .stat-card p {
+            color: #718096;
+            font-size: 13px;
+            margin-bottom: 12px;
+        }
+
+        .stat-card h2 {
+            font-size: 30px;
+            color: #4263eb;
+        }
+
+        .dashboard-panel {
+            background: white;
+            border: 1px solid #e1e7f0;
+            border-radius: 13px;
+            padding: 24px;
+        }
+
+        .dashboard-panel h2 {
+            margin-bottom: 12px;
+        }
+
+        .dashboard-panel p {
+            color: #718096;
+            line-height: 1.7;
+        }
+
+        .dashboard-date {
+            margin-top: 20px;
+            font-size: 13px;
+        }
+
+        .logout-btn {
+            padding: 11px 15px;
+            background: white;
+            border: 1px solid #e1e7f0;
+            border-radius: 8px;
+            cursor: pointer;
+        }
+
+        @media (max-width: 800px) {
+            .stats-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .dashboard-header {
+                align-items: flex-start;
+                flex-direction: column;
+            }
+        }
+
+        @media (max-width: 450px) {
+            .stats-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+<header class="navbar">
+    <div class="logo">
+        <span class="logo-icon">✓</span>
+        <div>
+            <h2>AttendCloud</h2>
+            <p>Student Attendance Management</p>
+        </div>
+    </div>
+</header>
+
+<main class="dashboard-container">
+
+    <div class="dashboard-header">
+        <div>
+            <p class="eyebrow">OVERVIEW</p>
+            <h1>Dashboard</h1>
+            <p id="welcome-message">Welcome to AttendCloud.</p>
+        </div>
+
+        <button id="logout-button" class="logout-btn" type="button">
+            Logout
+        </button>
+    </div>
+
+    <nav class="dashboard-nav">
+        <a href="dashboard.html" class="active">Dashboard</a>
+        <a href="students.html">Students</a>
+        <a href="attendance.html">Attendance</a>
+        <a href="reports.html">Reports</a>
+    </nav>
+
+    <section class="stats-grid">
+
+        <article class="stat-card">
+            <p>Total Students</p>
+            <h2 id="total-students">0</h2>
+        </article>
+
+        <article class="stat-card">
+            <p>Present / Late</p>
+            <h2 id="present-students">0</h2>
+        </article>
+
+        <article class="stat-card">
+            <p>Absent</p>
+            <h2 id="absent-students">0</h2>
+        </article>
+
+        <article class="stat-card">
+            <p>Attendance Rate</p>
+            <h2 id="attendance-rate">0%</h2>
+        </article>
+
+    </section>
+
+    <section class="dashboard-panel">
+        <h2>Attendance Overview</h2>
+
+        <p>
+            Use the navigation above to manage student records,
+            mark daily attendance, and view individual student reports.
+        </p>
+
+        <p class="dashboard-date">
+            Selected date:
+            <strong id="current-date"></strong>
+        </p>
+
+        <p id="dashboard-message" class="message" role="status"></p>
+    </section>
+
+</main>
+
+<footer class="footer">
+    <p>Cloud-Based Student Attendance Management System</p>
+</footer>
+
+<script type="module" src="js/dashboard.js"></script>
+
+</body>
+</html>

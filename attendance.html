@@ -1,0 +1,402 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Attendance Management | AttendCloud</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: #f4f7fb;
+            color: #263238;
+        }
+
+        /* Navigation bar */
+        .navbar {
+            background: #ffffff;
+            padding: 18px 6%;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 15px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+        }
+
+        .brand {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .brand-icon {
+            background: #2878c8;
+            color: white;
+            width: 42px;
+            height: 42px;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 25px;
+            font-weight: bold;
+        }
+
+        .brand h2 {
+            margin: 0;
+            font-size: 21px;
+        }
+
+        .brand p {
+            margin: 4px 0 0;
+            font-size: 12px;
+            color: #718096;
+        }
+
+        .nav-links {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: #425466;
+            padding: 12px 16px;
+            border-radius: 7px;
+            font-size: 14px;
+        }
+
+        .nav-links a:hover {
+            background: #edf3fa;
+        }
+
+        .nav-links a.active {
+            background: #2878c8;
+            color: white;
+        }
+
+        /* Main content */
+        .container {
+            max-width: 1150px;
+            margin: 40px auto;
+            padding: 0 22px;
+        }
+
+        .page-heading {
+            margin-bottom: 28px;
+        }
+
+        .page-heading h1 {
+            margin: 0 0 10px;
+            font-size: 32px;
+        }
+
+        .page-heading p {
+            margin: 0;
+            color: #718096;
+        }
+
+        .card {
+            background: #ffffff;
+            padding: 28px;
+            border-radius: 12px;
+            box-shadow: 0 3px 12px rgba(0, 0, 0, 0.05);
+            margin-bottom: 25px;
+        }
+
+        .card h2 {
+            margin: 0 0 25px;
+            font-size: 23px;
+        }
+
+        /* Date controls */
+        .controls {
+            display: flex;
+            align-items: end;
+            gap: 15px;
+            flex-wrap: wrap;
+            margin-bottom: 30px;
+        }
+
+        .date-field {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .date-field label {
+            font-weight: bold;
+            font-size: 14px;
+        }
+
+        input[type="date"] {
+            padding: 12px;
+            border: 1px solid #d5dce5;
+            border-radius: 6px;
+            font-size: 14px;
+        }
+
+        button {
+            font-family: inherit;
+        }
+
+        .primary-btn {
+            background: #2878c8;
+            color: white;
+            border: none;
+            padding: 13px 20px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 14px;
+        }
+
+        .primary-btn:hover {
+            background: #1e63a5;
+        }
+
+        .primary-btn:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+        }
+
+        /* Attendance table */
+        .table-wrapper {
+            width: 100%;
+            overflow-x: auto;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            min-width: 650px;
+        }
+
+        thead {
+            background: #f5f7fa;
+        }
+
+        th {
+            color: #526273;
+            font-size: 12px;
+            text-transform: uppercase;
+            letter-spacing: 0.3px;
+        }
+
+        th,
+        td {
+            padding: 17px 14px;
+            text-align: left;
+            border-bottom: 1px solid #e8edf3;
+        }
+
+        td {
+            font-size: 14px;
+        }
+
+        .attendance-status {
+            min-width: 115px;
+            padding: 9px;
+            border: 1px solid #d5dce5;
+            border-radius: 6px;
+            background: #ffffff;
+            font-size: 14px;
+        }
+
+        .empty-cell {
+            text-align: center;
+            color: #718096;
+            padding: 28px;
+        }
+
+        .table-footer {
+            display: flex;
+            justify-content: flex-end;
+            margin-top: 25px;
+        }
+
+        .message {
+            margin-top: 18px;
+            font-size: 14px;
+            overflow-wrap: anywhere;
+        }
+
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: 28px 15px;
+            margin-top: 50px;
+            color: #718096;
+            font-size: 12px;
+        }
+
+        @media (max-width: 700px) {
+            .navbar {
+                padding: 16px;
+            }
+
+            .nav-links {
+                width: 100%;
+            }
+
+            .nav-links a {
+                padding: 10px;
+            }
+
+            .container {
+                margin-top: 25px;
+                padding: 0 14px;
+            }
+
+            .page-heading h1 {
+                font-size: 26px;
+            }
+
+            .card {
+                padding: 18px;
+            }
+
+            .controls {
+                align-items: stretch;
+            }
+
+            .date-field,
+            input[type="date"],
+            .controls .primary-btn {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Navigation -->
+    <nav class="navbar">
+
+        <div class="brand">
+            <div class="brand-icon">✓</div>
+
+            <div>
+                <h2>AttendCloud</h2>
+                <p>Student Attendance Management</p>
+            </div>
+        </div>
+
+        <div class="nav-links">
+            <a href="dashboard.html">Dashboard</a>
+            <a href="students.html">Students</a>
+            <a href="attendance.html" class="active">Attendance</a>
+            <a href="reports.html">Reports</a>
+            <a href="#" id="logoutBtn">Logout</a>
+        </div>
+
+    </nav>
+
+    <!-- Main content -->
+    <main class="container">
+
+        <section class="page-heading">
+            <h1>Attendance Management</h1>
+            <p>Record and manage daily student attendance.</p>
+        </section>
+
+        <section class="card">
+
+            <h2>Mark Student Attendance</h2>
+
+            <!-- Date selection -->
+            <div class="controls">
+
+                <div class="date-field">
+                    <label for="attendanceDate">Select Date</label>
+
+                    <input
+                        type="date"
+                        id="attendanceDate"
+                        required
+                    >
+                </div>
+
+                <button
+                    type="button"
+                    class="primary-btn"
+                    id="loadAttendanceBtn"
+                >
+                    Load Attendance
+                </button>
+
+            </div>
+
+            <!-- Attendance table -->
+            <div class="table-wrapper">
+
+                <table>
+
+                    <thead>
+                        <tr>
+                            <th>Roll Number</th>
+                            <th>Student Name</th>
+                            <th>Class</th>
+                            <th>Status</th>
+                        </tr>
+                    </thead>
+
+                    <tbody id="attendanceTableBody">
+
+                        <tr>
+                            <td colspan="4" class="empty-cell">
+                                Loading students...
+                            </td>
+                        </tr>
+
+                    </tbody>
+
+                </table>
+
+            </div>
+
+            <!-- Save attendance -->
+            <div class="table-footer">
+
+                <button
+                    type="button"
+                    class="primary-btn"
+                    id="saveAttendanceBtn"
+                >
+                    Save Attendance
+                </button>
+
+            </div>
+
+            <p
+                id="attendanceMessage"
+                class="message"
+                role="status"
+                aria-live="polite"
+            ></p>
+
+        </section>
+
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        Cloud-Based Student Attendance Management System
+    </footer>
+
+    <!-- Firebase attendance logic -->
+    <script type="module" src="js/attendance.js"></script>
+
+</body>
+
+</html>
